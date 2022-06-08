@@ -1,57 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Counter } from "features/counter/Counter";
+import { PostsList } from "features/posts/PostsList";
+import { AddPostForm } from "features/posts/AddPostForm";
+import { SinglePostPage } from "features/posts/SinglePostPage";
+import { EditPostForm } from "features/posts/EditPostForm";
+import Layout from "./components/layout";
+import routes from "routes";
+import "./App.css";
+import { ThemeProvider } from "context";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ThemeProvider>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path={routes.home} element={<Counter />} />
+            <Route path={routes.posts} element={<PostsList />} />
+            <Route path={routes.addPost} element={<AddPostForm />} />
+            <Route path={routes.postDetail}>
+              <Route path=":id" element={<SinglePostPage />} />
+            </Route>
+            <Route path={routes.editPost}>
+              <Route path=":id" element={<EditPostForm />} />
+            </Route>
+          </Route>
+        </Routes>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

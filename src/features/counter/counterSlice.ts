@@ -1,41 +1,56 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../app/store';
-import { fetchCount } from './counterAPI';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState, AppThunk } from "app/store";
+import { fetchCount } from "./counterAPI";
 
 export interface CounterState {
   value: number;
-  status: 'idle' | 'loading' | 'failed';
+  status: "idle" | "loading" | "failed";
 }
 
 const initialState: CounterState = {
   value: 0,
-  status: 'idle',
+  status: "idle",
 };
 
-// The function below is called a thunk and allows us to perform async logic. It
-// can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
-// code can then be executed and other actions can be dispatched. Thunks are
-// typically used to make async requests.
+const PREFIX = "counter";
+
+// 아래 함수는 thunk를 호출하여 비동기적 로직을 수행하도록 한다.
+// 일반적인 action 과 같이 dispatch 될수 있다. ex) dispatch(incrementAsync(10))
+// thunk를 dispatch 함수와 함께 첫번째 인자로 호출한다.
+// 그리고 나서 비동기 코드가 실행되고 다른 action 이 dispatch 된다.
+// Thunks 는 대개 비동기 요청을 위해 사용된다.
 export const incrementAsync = createAsyncThunk(
-  'counter/fetchCount',
+  `${PREFIX}/fetchCount`,
   async (amount: number) => {
     const response = await fetchCount(amount);
-    // The value we return becomes the `fulfilled` action payload
-    return response.data;
+    return response.data; // return 값은 fulfilled 시 action의 payload 값이 된다. (A)
   }
 );
 
+/*
+// the outside "thunk creator" function
+const fetchUserById = userId => {
+  // the inside "thunk function"
+  return async (dispatch, getState) => {
+    try {
+      // make an async call in the thunk
+      const user = await userAPI.fetchById(userId)
+      // dispatch an action when we get the response back
+      dispatch(userLoaded(user))
+    } catch (err) {
+      // If something went wrong, handle it here
+    }
+  }
+}
+*/
+
+// createAction + createReducer
 export const counterSlice = createSlice({
-  name: 'counter',
+  name: PREFIX, // action type의 prefix, ex) counter/increment...
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
+    // reducers 필드로 리듀서를 정의하고 관련 action을 생성, counterSlice.actions
     increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
       state.value += 1;
     },
     decrement: (state) => {
@@ -43,6 +58,8 @@ export const counterSlice = createSlice({
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
     incrementByAmount: (state, action: PayloadAction<number>) => {
+      // state.value = 이전 상태값
+      // action = {type: 'counter/incrementByAmount', payload: Counter input 값}
       state.value += action.payload;
     },
   },
@@ -51,14 +68,14 @@ export const counterSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(incrementAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(incrementAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.value += action.payload;
+        state.status = "idle";
+        state.value += action.payload; // (A)
       })
       .addCase(incrementAsync.rejected, (state) => {
-        state.status = 'failed';
+        state.status = "failed";
       });
   },
 });
@@ -75,6 +92,8 @@ export const selectCount = (state: RootState) => state.counter.value;
 export const incrementIfOdd =
   (amount: number): AppThunk =>
   (dispatch, getState) => {
+    // dispatch(action) : 순수 자바스크립트 객체로 액션을 내보냄, 상태 변경할 수 있는 유일한 방법
+    // getState() : 애플리케이션의 현재 상태 트리 반환
     const currentValue = selectCount(getState());
     if (currentValue % 2 === 1) {
       dispatch(incrementByAmount(amount));
