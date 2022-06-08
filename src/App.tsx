@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home } from "features/home/Home";
 import { Counter } from "features/counter/Counter";
 import { PostsList } from "features/posts/PostsList";
 import { AddPostForm } from "features/posts/AddPostForm";
@@ -16,7 +17,8 @@ function App() {
       <ThemeProvider>
         <Routes>
           <Route element={<Layout />}>
-            <Route path={routes.home} element={<Counter />} />
+            <Route path={routes.home} element={<Home />} />
+            <Route path={routes.counter} element={<Counter />} />
             <Route path={routes.posts} element={<PostsList />} />
             <Route path={routes.addPost} element={<AddPostForm />} />
             <Route path={routes.postDetail}>
