@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useAppDispatch } from "app/hooks";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useNavigate, useParams } from "react-router-dom";
 import { postUpdated, selectPostOne } from "./postsSlice";
 import routes from "routes";
+import { IPost } from "./interfaces/post.interface";
 
 export const EditPostForm = () => {
   const navigate = useNavigate();
@@ -12,10 +12,10 @@ export const EditPostForm = () => {
   const params = useParams();
   const { id } = params;
 
-  const post = useSelector(selectPostOne(id));
+  const post: IPost | undefined = useAppSelector(selectPostOne(id));
 
-  const [title, setTitle] = useState(post.title);
-  const [content, setContent] = useState(post.content);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   const onTitleChanged = (e: React.ChangeEvent<HTMLInputElement>) =>
     setTitle(e.target.value);
@@ -28,6 +28,13 @@ export const EditPostForm = () => {
       navigate(`${routes.postDetail}/${id}`);
     }
   };
+
+  useEffect(() => {
+    if (post) {
+      setTitle(post.title);
+      setContent(post.content);
+    }
+  }, []);
 
   return (
     <section>

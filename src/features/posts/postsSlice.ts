@@ -10,12 +10,14 @@ const initialState = [
     content: "Hello!",
     date: sub(new Date(), { minutes: 5 }).toISOString(),
     user: "1",
+    reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 },
   },
   {
     id: "2",
     title: "Second Post",
     content: "More text",
     date: sub(new Date(), { minutes: 10 }).toISOString(),
+    reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 },
   },
 ];
 
@@ -39,6 +41,7 @@ const postsSlice = createSlice({
             content,
             date: new Date().toISOString(),
             user: userId,
+            reactions: { thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0 },
           },
         };
       },
@@ -51,10 +54,19 @@ const postsSlice = createSlice({
         existringPost.content = content;
       }
     },
+    reactionAdded(state, action) {
+      const { postId, reaction } = action.payload;
+      const existringPost: IPost | undefined = state.find(
+        (post) => post.id === postId
+      );
+      if (existringPost) {
+        existringPost.reactions[reaction]++;
+      }
+    },
   },
 });
 
-export const { postAdded, postUpdated } = postsSlice.actions;
+export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions;
 
 export const selectPosts = (state: RootState) => state.posts;
 
@@ -65,17 +77,7 @@ export const selectOrderedPosts = (state: RootState): IPost[] => {
 
 export const selectPostOne =
   (postId: string | undefined) => (state: RootState) => {
-    const post = state.posts.find(
-      (post: { id: string | undefined }) => post.id === postId
-    );
-    if (!post) {
-      return {
-        id: "",
-        title: "",
-        content: "",
-        date: "",
-      };
-    }
+    const post = state.posts.find((post: { id: string }) => post.id === postId);
     return post;
   };
 

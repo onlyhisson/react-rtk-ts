@@ -4,4 +4,5 @@ export interface IPost {
   content: string;
   date: string;
   user?: string;
+  reactions: any;
 }

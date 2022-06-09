@@ -3,7 +3,7 @@ import { RootState } from "app/store";
 
 type ThemeType = "light" | "dark";
 
-const initialState: ThemeType = "light";
+const initialState: ThemeType = "dark";
 
 const themeSlice = createSlice({
   name: "theme",

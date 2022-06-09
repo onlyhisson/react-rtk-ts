@@ -8,6 +8,7 @@ import { TimeAgo } from "./TimeAgo";
 import routes from "routes";
 import { IPost } from "./interfaces/post.interface";
 import { Container } from "styles/global-styeld";
+import { ReactionButtons } from "./ReactionButtons";
 
 export const PostsList = () => {
   const posts = useAppSelector(selectOrderedPosts);
@@ -18,6 +19,7 @@ export const PostsList = () => {
       <PostAuthor userId={post.user} />
       <TimeAgo timestamp={post.date} />
       <p className="post-content">{post.content.substring(0, 100)}</p>
+      <ReactionButtons post={post} />
       <div>
         <Link to={`${routes.postDetail}/${post.id}`}>상세보기</Link>
       </div>

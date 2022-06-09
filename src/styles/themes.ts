@@ -23,14 +23,9 @@ const fonts = {
     title: `'Merriweather', serif`,
   },
   size: {
-    xxxs: "0.3rem",
-    xxs: "0.7rem",
-    xs: "0.8rem",
-    sm: "1rem",
-    base: "1.2rem",
-    lg: "1.5rem",
-    xl: "2rem",
-    title: "6rem",
+    sm: 14,
+    base: 16,
+    lg: 18,
   },
   weight: {
     light: 100,
@@ -52,21 +47,16 @@ const colors = {
   ...defaultColor,
   main: "rgba(91, 37, 236, 1)",
   main2: "rgba(140, 102, 242, 1)",
-  main3: "rgba(91, 37, 236, 0.4)",
-  main4: "rgba(91, 37, 236, 0.1)",
-  main5: "rgba(91, 37, 236, 0.08)",
-  main6: "rgba(245, 242, 254, 1)",
-  main7: "rgba(91, 37, 236, 0.03)",
   error: "rgba(239, 83, 83, 1)",
   error2: "rgba(239, 83, 83, 0.1)",
-  font: "#010101",
+  font: "#e4e7eb;",
   font2: "rgba(1, 1, 1, 0.8)",
   font3: "#323232",
   font4: "rgba(1, 1, 1, 0.6)",
   font5: "#868686",
   font6: "#FFFFFF",
   grey: "#484848",
-  grey2: "rgba(1, 1, 1, 0.5)",
+  grey2: "rgba(1, 1, 1, 0.2)",
   grey3: "#E5E5E5",
   grey4: "rgba(238, 238, 238, 0.5)",
   grey5: "#FAFAFC",
@@ -79,7 +69,7 @@ const size = {
   tablet: 768,
   desktop: 1440,
   header: 65,
-  desktopHeader: 90,
+  dHeader: 80,
   maxWidth: 510,
   minWidth: 336,
 };
@@ -96,6 +86,7 @@ const lightThemeColors = {
   primary: "#00FFFF",
   secondary: "#fff",
   tertiary: "#808080",
+  bk: "#2f353d",
 };
 
 const darkThemeColors = {
@@ -103,6 +94,7 @@ const darkThemeColors = {
   primary: "#FFFF00",
   secondary: "#333",
   tertiary: "#d4d0c4",
+  bk: "#000",
 };
 
 const defalutTheme = {

@@ -11,6 +11,16 @@ export const Container = styled.div`
   padding: 0;
 `;
 
+export const RowDiv = styled(Container)`
+  flex-direction: row;
+`;
+
+export const Span = styled.span`
+  font-family: "Pretendard";
+  text-align: center;
+  white-space: pre-wrap;
+`;
+
 export default createGlobalStyle`
     @font-face {
       font-family: 'Pretendard';

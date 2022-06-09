@@ -1,4 +1,6 @@
-const HOME = "/";
+const HOME = "/home";
+
+const NEWS = "/";
 
 const COUNTER = "/counter";
 
@@ -9,6 +11,7 @@ const POST_DETAIL = `${POSTS}/detail`;
 
 const routes = {
   home: HOME,
+  news: NEWS,
   posts: POSTS,
   addPost: POST_ADD,
   editPost: POST_EDIT,

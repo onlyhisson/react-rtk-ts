@@ -10,7 +10,7 @@ export const SinglePostPage = (/* {match} 대신 useParams */) => {
   const params = useParams();
   const { id } = params;
 
-  const post: IPost = useAppSelector(selectPostOne(id));
+  const post: IPost | undefined = useAppSelector(selectPostOne(id));
 
   if (!post) {
     return (

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "features/home/Home";
+import { News } from "features/news/News";
 import { Counter } from "features/counter/Counter";
 import { PostsList } from "features/posts/PostsList";
 import { AddPostForm } from "features/posts/AddPostForm";
@@ -17,6 +18,7 @@ function App() {
       <ThemeProvider>
         <Routes>
           <Route element={<Layout />}>
+            <Route path={routes.news} element={<News />} />
             <Route path={routes.home} element={<Home />} />
             <Route path={routes.counter} element={<Counter />} />
             <Route path={routes.posts} element={<PostsList />} />
