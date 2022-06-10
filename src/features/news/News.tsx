@@ -29,7 +29,7 @@ export const News = () => {
 };
 
 const NewsWapper = styled.div`
-  background-color: ${(props) => props.theme.colors.theme5};
+  background-color: ${(props) => props.theme.colors.theme8};
   .news-b-lt {
     padding-top: 10px;
     padding-bottom: 10px;

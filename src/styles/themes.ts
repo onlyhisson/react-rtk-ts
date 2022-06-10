@@ -27,6 +27,8 @@ const fonts = {
     sm: 14,
     base: 16,
     lg: 18,
+    xlg: 20,
+    h3: 30,
   },
   weight: {
     light: 100,
@@ -59,6 +61,8 @@ const colors = {
   theme5: "rgba(14,17,17, 1)",
   theme6: "rgba(14,17,17, 0.5)",
   theme7: "rgba(35,43,43, 0.5)",
+  theme8: "rgba(42, 42, 42, 1)",
+  theme9: "rgba(48, 48, 48, 1)",
   grey1: "rgba(192,197,206, 1)",
   grey2: "rgba(167,173,186, 1)",
   grey3: "rgba(101,115,126, 1)",
@@ -72,7 +76,7 @@ const size = {
   desktop: 1440,
   header: 65,
   dHeader: 80,
-  maxWidth: 510,
+  maxWidth: 1200,
   minWidth: 336,
 };
 

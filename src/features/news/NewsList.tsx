@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Span } from "styles/global-styeld";
-
+import NewsDetail from "./NewsDetail";
 export interface INews {
   id: string;
   type: string;
@@ -76,25 +76,33 @@ const Pagination = () => {
 };
 
 const NewsList = () => {
-  const [type, setType] = useState(0);
+  const [type, setType] = useState(0); // 게시물 타입
+  const [postId, setPostId] = useState("0"); // 선택한 게시물
 
   const renderedNews = newList.map((el: INews, idx: number) => (
-    <NewsItem key={idx}>
-      <NewsItemLeft>
-        <img src={el.img} alt="news-img" />
-      </NewsItemLeft>
-      <NewsItemRight>
-        <NewsItemRow>
-          <Span className="b-type">{el.type}</Span>
-          <Span className="b-refer">{el.ref}</Span>
-        </NewsItemRow>
-        <NewsItemRow>
-          <Span className="b-title">{el.title}</Span>
-        </NewsItemRow>
-        <NewsItemRow>
-          <Span className="b-content">{el.content}</Span>
-        </NewsItemRow>
-      </NewsItemRight>
+    <NewsItem
+      key={idx}
+      onClick={() => setPostId(el.id)}
+      active={el.id === postId}
+    >
+      <div className="news-excerpt">
+        <NewsItemLeft>
+          <img src={el.img} alt="news-img" />
+        </NewsItemLeft>
+        <NewsItemRight>
+          <NewsItemRow>
+            <Span className="b-type">{el.type}</Span>
+            <Span className="b-refer">{el.ref}</Span>
+          </NewsItemRow>
+          <NewsItemRow>
+            <Span className="b-title">{el.title}</Span>
+          </NewsItemRow>
+          <NewsItemRow>
+            <Span className="b-content">{el.content}</Span>
+          </NewsItemRow>
+        </NewsItemRight>
+      </div>
+      {el.id === postId && <NewsDetail />}
     </NewsItem>
   ));
   return (
@@ -168,12 +176,19 @@ const TypeWrapper = styled.div`
   }
 `;
 
-const NewsItem = styled.div`
+const NewsItem = styled.div<{ active: boolean }>`
   display: flex;
+  flex-direction: column;
   padding: 10px 10px;
-  margin-bottom: 15px;
-  background-color: ${(props) => props.theme.colors.theme7};
+  margin-bottom: 20px;
+  background-color: ${(props) => props.theme.colors.theme9};
   box-shadow: ${(props) => props.theme.colors.bk} 2px 5px 3px;
+  max-width: ${(props) => props.theme.size.maxWidth};
+
+  .news-excerpt {
+    display: flex;
+  }
+
   .b-type {
     margin-right: 10px;
     font-size: ${(props) => props.theme.fonts.size.base}px;
@@ -203,6 +218,7 @@ const NewsItemLeft = styled.div`
   }
 `;
 const NewsItemRight = styled.div`
+  width: 100%;
   padding: 10px;
   display: flex;
   flex-direction: column;
