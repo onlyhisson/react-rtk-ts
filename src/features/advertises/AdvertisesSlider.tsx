@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import styled, { css, keyframes } from "styled-components";
 import { useAppSelector } from "app/hooks";
@@ -9,6 +9,101 @@ import { Span } from "styles/global-styeld";
 /* imoprt css */
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+type TAfterChange = (currentSlide: number) => void;
+type TBeforeChange = (currentSlide: number, nextSlide: number) => void;
+
+const ProgressWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  border-radius: 6px;
+  touch-action: none;
+  box-sizing: border-box;
+`;
+
+const ProgressRail = styled.div<{ width: number }>`
+  position: absolute;
+  right: 5%;
+  top: -57px;
+  width: ${(props) => props.width}%;
+  height: 4px;
+  background-color: ${(props) => props.theme.colors.main};
+  border-radius: 6px;
+`;
+const ProgressTrack = styled.div<{ position: number }>`
+  position: absolute;
+  right: 5%;
+  top: -57px;
+  width: ${(props) => props.position}%;
+  height: 4px;
+  background-color: #e9e9e9;
+  border-radius: 6px;
+  transition: width 0.5s;
+`;
+
+const SliderTrack = ({ position }: any) => {
+  const W_PERCENT = 20;
+  return (
+    <ProgressWrapper className="track-wrapper">
+      <ProgressRail width={W_PERCENT}></ProgressRail>
+      <ProgressTrack position={W_PERCENT * (1 - position)}></ProgressTrack>
+    </ProgressWrapper>
+  );
+};
+
+const AdvertisesSlider = () => {
+  const advertises = useAppSelector(selectAdvertises);
+
+  const [position, setPosition] = useState({
+    slideIndex: 1,
+    total: advertises.length,
+  });
+
+  const afterChangeFun: TAfterChange = (idx: number) => {
+    setPosition({
+      ...position,
+      slideIndex: idx + 1,
+    });
+  };
+
+  const beforeChangeFun: TBeforeChange = (current: number, next: number) => {
+    //setPosition({ ...position, slideIndex: next + 1 });
+  };
+
+  var settings = {
+    dots: false,
+    fade: true,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerPadding: "0px",
+    pauseOnHover: true,
+    afterChange: (cur: number) => afterChangeFun(cur),
+    beforeChange: (current: number, next: number) =>
+      beforeChangeFun(current, next),
+  };
+
+  const renderedAdvertises = advertises.map((item: IAdvertisement) => (
+    <SlickDiv img={item.img} key={item.id}>
+      <SlickTitle>
+        <Span>{item.title}</Span>
+      </SlickTitle>
+      <SlickText>
+        <Span>{item.subTitle}</Span>
+      </SlickText>
+    </SlickDiv>
+  ));
+
+  return (
+    <div className="SlickComponent">
+      <StyledSlider {...settings}>{renderedAdvertises}</StyledSlider>
+      <SliderTrack position={position.slideIndex / position.total} />
+    </div>
+  );
+};
 
 const SlickDivAnimation = keyframes`
   from {
@@ -38,11 +133,11 @@ const SlickDiv = styled.div<{ img: string }>`
     `;
   }}
 
-  animation-duration: 10s;
-  animation-timing-function: ease-in;
-  animation-name: ${SlickDivAnimation};
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
+  //animation-duration: 10s;
+  //animation-timing-function: ease-in;
+  //animation-name: ${SlickDivAnimation};
+  //animation-fill-mode: forwards;
+  //animation-iteration-count: infinite;
 
   display: flex;
   justify-content: center;
@@ -103,38 +198,5 @@ const StyledSlider = styled(Slider)`
     overflow-x: hidden;
   }
 `;
-
-const AdvertisesSlider = () => {
-  const advertises = useAppSelector(selectAdvertises);
-
-  var settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: "0px",
-  };
-
-  const renderedAdvertises = advertises.map((item: IAdvertisement) => (
-    <SlickDiv img={item.img} key={item.id}>
-      <SlickTitle>
-        <Span>{item.title}</Span>
-      </SlickTitle>
-      <SlickText>
-        <Span>{item.subTitle}</Span>
-      </SlickText>
-    </SlickDiv>
-  ));
-
-  return (
-    <div className="SlickComponent">
-      <StyledSlider {...settings}>{renderedAdvertises}</StyledSlider>
-    </div>
-  );
-};
 
 export default AdvertisesSlider;

@@ -29,8 +29,7 @@ export const News = () => {
 };
 
 const NewsWapper = styled.div`
-  background-color: #303846;
-
+  background-color: ${(props) => props.theme.colors.theme5};
   .news-b-lt {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -39,20 +38,24 @@ const NewsWapper = styled.div`
   .news-b-lb {
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-right: 14px;
   }
 
   .news-b-rt {
-    background-color: #00f091;
+    background-color: ${(props) => props.theme.colors.theme1};
+    height: 450px;
+    padding: 10px;
+    margin-bottom: 20px;
   }
 
   .news-b-rb {
-    background-color: #0af11f;
+    background-color: ${(props) => props.theme.colors.theme1};
+    padding: 10px;
   }
 `;
 
 const NewsMain = styled.div``;
 const NewsBody = styled.div`
-  background-color: white;
   display: flex;
   justify-content: center;
   padding-left: 80px;
@@ -64,9 +67,8 @@ const NewsBodyLeft = styled.div`
   padding-right: 10px;
 `;
 const NewsBodyRight = styled.div`
-  width: 350px;
+  min-width: 350px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: #ffff1f;
 `;

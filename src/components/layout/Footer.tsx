@@ -65,7 +65,7 @@ const FooterWrapper = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.colors.bk};
+  background-color: ${(props) => props.theme.colors.theme6};
   font-size: ${(props) => props.theme.fonts.size.lg}px;
 
   span {

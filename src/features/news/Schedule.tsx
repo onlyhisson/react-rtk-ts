@@ -4,9 +4,9 @@ import moment from "moment";
 import { Span } from "styles/global-styeld";
 
 const typeColor: any = {
-  "1": "rgba(98,89,225, 0.5)",
-  "2": "rgba(89,225,98, 0.5)",
-  "3": "rgba(225,166,89, 0.5)",
+  "1": "rgba(98,89,225, 0.8)",
+  "2": "rgba(89,225,98, 0.8)",
+  "3": "rgba(225,166,89, 0.8)",
 };
 
 const schedule = [
@@ -108,21 +108,25 @@ const ScheduleDiv = styled.div`
 
   .icon-wrapper {
     padding: 0 5px;
+    margin: 0 5px;
     display: flex;
     align-items: center;
-    color: ${(props) => props.theme.colors.main};
+    color: ${(props) => props.theme.colors.main2};
+    background-color: ${(props) => props.theme.colors.theme3};
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   }
 
   .sch-date {
     font-weight: 700;
-    font-size: ${(props) => props.theme.fonts.size.lg}px;
+    font-size: ${(props) => props.theme.fonts.size.sm}px;
+    color: ${(props) => props.theme.colors.font};
   }
 
   .sch-day {
+    margin-left: 3px;
     font-weight: 400;
-    font-size: ${(props) => props.theme.fonts.size.sm}px;
-    color: ${(props) => props.theme.colors.main};
+    font-size: ${(props) => props.theme.fonts.size.xs}px;
+    color: ${(props) => props.theme.colors.grey1};
   }
 `;
 
@@ -135,11 +139,12 @@ const Tabs = styled.div`
   .tab-items {
     display: flex;
     border-bottom: solid 1px;
-    border-color: ${(props) => props.theme.colors.grey2};
+    border-color: ${(props) => props.theme.colors.grey3};
   }
   .tab-item {
     padding-left: 10px;
     padding-right: 15px;
+    color: ${(props) => props.theme.colors.font};
   }
 `;
 
@@ -148,17 +153,17 @@ const ScheduleDate = styled.div`
 `;
 
 const ScheduleBox = styled.div`
-  width: 160px;
-  height: 140px;
-  //background-color: rgba(0, 0, 0, 0.2);
+  width: 150px;
+  height: 125px;
+  background-color: ${(props) => props.theme.colors.theme3};
   margin: 0 5px;
-  padding: 10px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  padding: 5px 10px 10px 10px;
+  box-shadow: ${(props) => props.theme.colors.bk} 2px 5px 3px;
 `;
 
 const ScheduleOne = styled.div<{ color: string }>`
   margin: 5px 0;
-  padding: 3px 8px;
+  padding: 2px 8px;
   border-radius: 3px;
   ${(props: any) => {
     const color = typeColor[props.color];
@@ -168,7 +173,8 @@ const ScheduleOne = styled.div<{ color: string }>`
   }}
 
   span {
-    font-size: ${(props) => props.theme.fonts.size.sm}px;
+    font-size: ${(props) => props.theme.fonts.size.xs}px;
+    color: ${(props) => props.theme.colors.font};
   }
 `;
 
