@@ -70,13 +70,13 @@ const AdvertisesSlider = () => {
     //setPosition({ ...position, slideIndex: next + 1 });
   };
 
-  var settings = {
+  const settings = {
     dots: false,
     fade: true,
     infinite: true,
     speed: 500,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
     slidesToShow: 1,
     slidesToScroll: 1,
     centerPadding: "0px",
@@ -107,7 +107,7 @@ const AdvertisesSlider = () => {
 
 const SlickDivAnimation = keyframes`
   from {
-    background-size: 120% auto;
+    background-size: 105% auto;
     
   }
   to {
@@ -133,8 +133,8 @@ const SlickDiv = styled.div<{ img: string }>`
     `;
   }}
 
-  //animation-duration: 10s;
-  //animation-timing-function: ease-in;
+  //animation-duration: 5s;
+  //animation-timing-function: ease-in-out;
   //animation-name: ${SlickDivAnimation};
   //animation-fill-mode: forwards;
   //animation-iteration-count: infinite;

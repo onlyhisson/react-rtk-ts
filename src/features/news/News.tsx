@@ -64,7 +64,8 @@ const NewsBody = styled.div`
   padding-bottom: 10px;
 `;
 const NewsBodyLeft = styled.div`
-  padding-right: 10px;
+  max-width: 900px;
+  padding-right: 20px;
 `;
 const NewsBodyRight = styled.div`
   min-width: 350px;

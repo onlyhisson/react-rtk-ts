@@ -1,39 +1,66 @@
 import styled from "styled-components";
+import { BsXLg } from "react-icons/bs";
 import { Span } from "styles/global-styeld";
-import moment from "moment";
+import NewsComments from "./NewsComments";
 
-const NewsDetail = ({ news }: any) => {
+const NewsDetail = ({ news, onClick }: any) => {
   return (
     <NewsWrapper>
       <div className="nd-img">
+        <div className="nd-close" onClick={onClick}>
+          <BsXLg/>
+        </div>
         <img
-          src={"https://images.unsplash.com/photo-1587161584760-f51779fb276a"}
+          src={news.img}
           alt="news"
         />
       </div>
       <div className="nd-title">
-        <Span>
-          European Stock Futures Lower; Investors Digest ECB Statement
-        </Span>
+        <Span>{news.title}</Span>
       </div>
       <div className="nd-mdata">
         <div className="nd-mdata-item date">
-          <Span>{moment("2022-06-10").format("DD MMM ddd")}</Span>
+          <Span>{news.date}</Span>
         </div>
         <div className="nd-mdata-item refer">
           <Span>Yahoo Lite</Span>
         </div>
       </div>
+      <div className="nd-content" dangerouslySetInnerHTML={{__html: news.content}}></div>
+      <NewsComments newsId={news.id}/>
     </NewsWrapper>
   );
 };
 
 const NewsWrapper = styled.div`
   padding: 10px;
-  max-width: ${(props) => props.theme.size.maxWidth};
   color: ${(props) => props.theme.colors.font};
 
+  .nd-close {
+    position: absolute;
+    top: 4px;
+    right: 7px;
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+
+    svg {
+      width: 25px;
+      height: 25px;
+      color:  ${(props) => props.theme.colors.grey1};
+    }
+
+    span {
+      font-size: ${(props) => props.theme.fonts.size.xlg}px;
+    }
+
+    svg:hover {
+      color: white;
+    }
+  }
+
   .nd-img {
+    position: relative;
     display: flex;
     justify-content: center;
     img {
@@ -59,6 +86,11 @@ const NewsWrapper = styled.div`
     margin-right: 10px;
   }
 
+  .nd-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
   .date {
     color: ${(props) => props.theme.colors.main2};
   }

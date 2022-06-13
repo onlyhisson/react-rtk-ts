@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import moment from "moment";
 import { Span } from "styles/global-styeld";
 import NewsDetail from "./NewsDetail";
 export interface INews {
@@ -54,6 +55,15 @@ const newList: INews[] = [
   },
 ];
 
+const news_detail = {
+  id: "1",
+  title: 'European Stock Futures Lower; Investors Digest ECB Statement',
+  img: 'https://images.unsplash.com/photo-1587161584760-f51779fb276a',
+  date: moment("2022-06-10").format("DD MMM ddd"),
+  content: 'Investing.com - European stock markets are expected to open lower Friday as investors digest the rate hike guidance from the European Central Bank ahead of the release of key U.S. inflation data.<br/>At 2 AM ET (0600 GMT), the DAX futures contract in Germany traded 0.7% lower, CAC 40 futures in France dropped 0.7% and the FTSE 100 futures contract in the U.K. fell 0.7%.'
+
+}
+
 const TYPE_BOARD = ["Total", "News", "Notice"];
 
 const Pagination = () => {
@@ -82,10 +92,9 @@ const NewsList = () => {
   const renderedNews = newList.map((el: INews, idx: number) => (
     <NewsItem
       key={idx}
-      onClick={() => setPostId(el.id)}
       active={el.id === postId}
     >
-      <div className="news-excerpt">
+      <div className="news-excerpt" onClick={() => setPostId(el.id)}>
         <NewsItemLeft>
           <img src={el.img} alt="news-img" />
         </NewsItemLeft>
@@ -102,7 +111,7 @@ const NewsList = () => {
           </NewsItemRow>
         </NewsItemRight>
       </div>
-      {el.id === postId && <NewsDetail />}
+      {el.id === postId && <NewsDetail news={news_detail} onClick={() => setPostId("0")}/>}
     </NewsItem>
   ));
   return (
@@ -183,7 +192,11 @@ const NewsItem = styled.div<{ active: boolean }>`
   margin-bottom: 20px;
   background-color: ${(props) => props.theme.colors.theme9};
   box-shadow: ${(props) => props.theme.colors.bk} 2px 5px 3px;
-  max-width: ${(props) => props.theme.size.maxWidth};
+  transition: box-shadow 300ms ease-in-out, transform 300ms ease-in-out;
+
+  &:hover{ 
+    box-shadow: ${(props) => props.theme.colors.bk} 0px 0px 10px 3px;
+  }
 
   .news-excerpt {
     display: flex;
