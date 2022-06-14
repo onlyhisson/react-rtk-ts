@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import styled, { css, keyframes } from "styled-components";
-import { useAppSelector } from "app/hooks";
+import { useAppSelector } from "hooks";
 import { IAdvertisement } from "./interfaces/advertisement.interface";
 import { selectAdvertises } from "./advertisesSlice";
 import { Span } from "styles/global-styeld";

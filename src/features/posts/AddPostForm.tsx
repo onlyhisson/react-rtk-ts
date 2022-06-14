@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { postAdded } from "./postsSlice";
 import { selectUsers } from "features/users/usersSlice";
 import routes from "routes";

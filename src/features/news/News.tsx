@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container, RowDiv } from "styles/global-styeld";
+import { Container } from "styles/global-styeld";
 import AdvertisesSlider from "features/advertises/AdvertisesSlider";
 import Schedule from "./Schedule";
 import NewsList from "./NewsList";

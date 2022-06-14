@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAppSelector } from "app/hooks";
+import { useAppSelector } from "hooks";
 import { lightTheme, darkTheme } from "styles/themes";
 
 type State = {

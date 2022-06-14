@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useAppSelector } from "app/hooks";
+import { useAppSelector } from "hooks";
 import { selectPostOne } from "./postsSlice";
 import { PostAuthor } from "./PostAuthor";
 import { TimeAgo } from "./TimeAgo";

@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch } from "hooks";
 import { IPost } from "./interfaces/post.interface";
 import { reactionAdded } from "./postsSlice";
 

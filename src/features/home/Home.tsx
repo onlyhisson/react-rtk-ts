@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppSelector } from "app/hooks";
+import { useAppSelector } from "hooks";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import routes from "routes";

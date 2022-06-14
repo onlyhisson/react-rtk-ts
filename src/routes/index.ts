@@ -2,6 +2,8 @@ const HOME = "/home";
 
 const NEWS = "/";
 
+const FUNDING = "funding";
+
 const COUNTER = "/counter";
 
 const POSTS = "/posts";
@@ -12,6 +14,7 @@ const POST_DETAIL = `${POSTS}/detail`;
 const routes = {
   home: HOME,
   news: NEWS,
+  funding: FUNDING,
   posts: POSTS,
   addPost: POST_ADD,
   editPost: POST_EDIT,

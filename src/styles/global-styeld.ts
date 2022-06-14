@@ -1,6 +1,16 @@
 import styled, { createGlobalStyle } from "styled-components";
 import PretendardVariable from "./fonts/PretendardVariable.woff2";
 
+export const RowDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ColDiv = styled.div`
+  flex-direction: column;
+`;
+
 export const Container = styled.div`
   width: 100%;
   display: flex;
@@ -11,9 +21,6 @@ export const Container = styled.div`
   padding: 0;
 `;
 
-export const RowDiv = styled(Container)`
-  flex-direction: row;
-`;
 
 export const Span = styled.span`
   font-family: "Pretendard";
