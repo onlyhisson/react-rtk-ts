@@ -94,23 +94,25 @@ const NewsList = () => {
       key={idx}
       active={el.id === postId}
     >
-      <div className="news-excerpt" onClick={() => setPostId(el.id)}>
-        <NewsItemLeft>
-          <img src={el.img} alt="news-img" />
-        </NewsItemLeft>
-        <NewsItemRight>
-          <NewsItemRow>
-            <Span className="b-type">{el.type}</Span>
-            <Span className="b-refer">{el.ref}</Span>
-          </NewsItemRow>
-          <NewsItemRow>
-            <Span className="b-title">{el.title}</Span>
-          </NewsItemRow>
-          <NewsItemRow>
-            <Span className="b-content">{el.content}</Span>
-          </NewsItemRow>
-        </NewsItemRight>
-      </div>
+      {
+        el.id !== postId && <div className="news-excerpt" onClick={() => setPostId(el.id)}>
+          <NewsItemLeft>
+            <img src={el.img} alt="news-img" />
+          </NewsItemLeft>
+          <NewsItemRight>
+            <NewsItemRow>
+              <Span className="b-type">{el.type}</Span>
+              <Span className="b-refer">{el.ref}</Span>
+            </NewsItemRow>
+            <NewsItemRow>
+              <Span className="b-title">{el.title}</Span>
+            </NewsItemRow>
+            <NewsItemRow>
+              <Span className="b-content">{el.content}</Span>
+            </NewsItemRow>
+          </NewsItemRight>
+        </div>
+      }
       {el.id === postId && <NewsDetail news={news_detail} onClick={() => setPostId("0")}/>}
     </NewsItem>
   ));

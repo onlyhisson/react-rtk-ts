@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled, { css } from "styled-components";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import moment from "moment";
@@ -8,6 +9,8 @@ const typeColor: any = {
   "2": "rgba(89,225,98, 0.8)",
   "3": "rgba(225,166,89, 0.8)",
 };
+
+const sType: string[] = ["All", "Funding", "NFT"];
 
 const schedule = [
   {
@@ -56,6 +59,9 @@ const schedule = [
 ];
 
 const Schedule = () => {
+
+  const [type, setType] = useState(0);
+
   const renderedBox = schedule.map((el, idx) => (
     <ScheduleBox key={idx}>
       <ScheduleDate>
@@ -74,18 +80,16 @@ const Schedule = () => {
     <>
       <Tabs>
         <div className="tab-items">
-          <div className="tab-item">
-            <Span>All</Span>
-          </div>
-          <div className="tab-item">
-            <Span>type1</Span>
-          </div>
-          <div className="tab-item">
-            <Span>type2</Span>
-          </div>
-          <div className="tab-item">
-            <Span>type3</Span>
-          </div>
+          {sType.map((el, idx) => (
+            <TabItem 
+              key={idx}
+              active={type === idx}
+              onClick={() => setType(idx)}>
+              <div>
+                <Span>{el}</Span>
+              </div>
+            </TabItem>
+          ))}
         </div>
       </Tabs>
       <ScheduleDiv>
@@ -113,7 +117,12 @@ const ScheduleDiv = styled.div`
     align-items: center;
     color: ${(props) => props.theme.colors.main2};
     background-color: ${(props) => props.theme.colors.theme3};
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    box-shadow: ${(props) => props.theme.colors.bk} 2px 5px 3px;
+    transition: box-shadow 300ms ease-in-out, transform 300ms ease-in-out;
+  }
+
+  .icon-wrapper:hover { 
+    box-shadow: ${(props) => props.theme.colors.bk} 0px 0px 10px 2px;
   }
 
   .sch-date {
@@ -134,17 +143,55 @@ const Tabs = styled.div`
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 10px;
-  line-height: 35px;
-
+  
   .tab-items {
+    height: 37px;
     display: flex;
     border-bottom: solid 1px;
     border-color: ${(props) => props.theme.colors.grey3};
   }
-  .tab-item {
-    padding-left: 10px;
-    padding-right: 15px;
-    color: ${(props) => props.theme.colors.font};
+`;
+
+const TabItem = styled.div<{ active: boolean }>`
+  width: 70px;
+  color: ${(props) => props.theme.colors.font};
+  line-height: 35px;
+  margin-right: 10px;
+
+  div {
+    text-align: center;
+    transition: color .5s, border .5s;
+    border-bottom: solid 2px;
+    border-color: rgba(0, 0, 0, 0);
+    ${(props: any) => {
+      if (props.active) {
+        return css`
+          color: ${(props) => props.theme.colors.main3};
+          border-color: ${(props) => props.theme.colors.main3};
+        `;
+        }
+    }}
+  }
+
+  div:hover {
+    color: ${(props) => props.theme.colors.main3};
+    border-bottom: solid 2px;
+  }
+
+  span {
+    //text-transform: uppercase;
+    transition: color .5s;
+    ${(props: any) => {
+      if (props.active) {
+        return css`
+          color: ${(props) => props.theme.colors.main3};
+        `;
+        }
+    }}
+  }
+
+  span:hover {
+    color: ${(props) => props.theme.colors.main3};
   }
 `;
 
@@ -162,7 +209,7 @@ const ScheduleBox = styled.div`
 `;
 
 const ScheduleOne = styled.div<{ color: string }>`
-  margin: 5px 0;
+  margin: 6px 0;
   padding: 2px 8px;
   border-radius: 3px;
   ${(props: any) => {
@@ -171,6 +218,11 @@ const ScheduleOne = styled.div<{ color: string }>`
       background: ${color};
     `;
   }}
+  transition: box-shadow .5s;
+  
+  &:hover {
+    box-shadow: ${(props) => props.theme.colors.theme5} 4px 4px 6px;
+  }
 
   span {
     font-size: ${(props) => props.theme.fonts.size.xs}px;
