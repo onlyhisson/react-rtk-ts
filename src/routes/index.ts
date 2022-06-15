@@ -1,3 +1,5 @@
+const LOGIN = "/login";
+
 const HOME = "/home";
 
 const NEWS = "/";
@@ -12,6 +14,7 @@ const POST_EDIT = `${POSTS}/update`;
 const POST_DETAIL = `${POSTS}/detail`;
 
 const routes = {
+  login: LOGIN,
   home: HOME,
   news: NEWS,
   funding: FUNDING,

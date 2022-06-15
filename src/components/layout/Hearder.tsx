@@ -15,13 +15,13 @@ const LanguageBox = () => {
   return <SelectBox className="sel-box">
     <LangWrapper>
       <ColDiv>
-        <LangItem top={7}>
-          <MdLanguage /> <Span>{LANGUAGES[lang]}</Span>
+        <LangItem top={9}>
+          <MdLanguage /> <Span className="sel-leng">{LANGUAGES[lang]}</Span>
         </LangItem>
         {LANGUAGES.map((el, idx) => 
           <LangItem 
             key={idx}
-            top={7 + 30 * (idx + 1)} 
+            top={9 + 30 * (idx + 1)} 
             className="l-item"
             onClick={() => setLang(idx)}
           >
@@ -41,19 +41,21 @@ export const Header = () => {
           src={`${process.env.PUBLIC_URL}/assets/img/logo/logo_wh.png`}
           alt="logo"
         />
-        <Link to={routes.news}>
+        <Link to={routes.news} className="h-menu-item">
           <Span>뉴스 / 공지</Span>
         </Link>
-        <Link to={routes.posts}>
+        <Link to={routes.posts} className="h-menu-item">
           <Span>펀딩하기</Span>
         </Link>
-        <Link to={routes.addPost}>
+        <Link to={routes.addPost} className="h-menu-item">
           <Span>NFT</Span>
         </Link>
       </div>
       <div className="header-s header-r">
         <LanguageBox/>
-        <Span>로그인</Span>
+        <Link to={routes.login} className="h-menu-item">
+          <Span>로그인</Span>
+        </Link>
       </div>
     </HeaderWrapper>
   );
@@ -61,9 +63,18 @@ export const Header = () => {
 
 const SelectBox = styled(RowDiv)`
   position: relative;
+  margin-right: 15px;
 
   svg {
     color: ${props => props.theme.colors.grey1};
+  }
+
+  .sel-leng {
+    width: 32px;
+  }
+
+  .l-item {
+    left: 4px;
   }
 
   .l-item:hover {
@@ -84,12 +95,14 @@ const LangItem = styled.div<{ top: number}>`
   span {
     margin-left: 8px !important;
     text-transform: uppercase;
+    font-size: ${props => props.theme.fonts.size.sm}px !important;
   }
 `;
 
 const LangWrapper = styled(RowDiv)`
   position: absolute;
   top: -19px;
+  left: -100px;
   padding: 3px;
   padding-right: 5px;
   border-style: solid;
@@ -100,10 +113,11 @@ const LangWrapper = styled(RowDiv)`
   width: 72px;
   overflow: hidden;
 
-  transition: height .5s;
+  transition: height .5s, background-color .5s;
 
   &:hover {
     height: 90px;
+    background-color: ${props => props.theme.colors.theme6};
   }
 `;
 
@@ -140,15 +154,32 @@ const HeaderWrapper = styled.header`
       margin-right: 50px;
       height: 40px;
     }
-
-    a {
-      margin-right: 25px;
-    }
   }
 
   .header-r {
+  }
+
+  .h-menu-item {
+    line-height: 28px;
+    margin-right: 25px;
+    border-bottom-style: solid;
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+    transition: border-color .5s;
+
+    &:hover {
+      border-bottom-style: solid;
+      border-width: 2px;
+      border-color: ${(props) => props.theme.colors.main3};
+    }
+
     span {
-      margin-left: 55px;
+      transition: color .5s;
+    }
+
+    span:hover {
+      color: ${(props) => props.theme.colors.main3};
     }
   }
 `;
+
