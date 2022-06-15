@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import moment from "moment";
 import { Span } from "styles/global-styeld";
+import Modal from "components/modal/Modal";
+import FundingDetail from "features/funding/FundingDetail";
 
 const typeColor: any = {
   "1": "rgba(98,89,225, 0.8)",
@@ -54,13 +56,36 @@ const schedule = [
       { id: "12", type: "2", title: "event12" },
       { id: "13", type: "3", title: "event13" },
       { id: "14", type: "1", title: "event14" },
+      { id: "15", type: "2", title: "event15" },
     ],
   },
 ];
 
 const Schedule = () => {
-
   const [type, setType] = useState(0);
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
+  /* modal open 시 뒷 배경 고정 */
+  useEffect(() => {
+    if(modalOpen) {
+      document.body.style.cssText = `
+        position: fixed; 
+        top: -${window.scrollY}px;
+        overflow-y: scroll;
+        width: 100%;
+      `;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    }
+
+  }, [modalOpen])
 
   const renderedBox = schedule.map((el, idx) => (
     <ScheduleBox key={idx}>
@@ -68,11 +93,17 @@ const Schedule = () => {
         <Span className="sch-date">{moment(el.date).format("DD MMM")}</Span>
         <Span className="sch-day">{moment(el.date).format(" ddd")}</Span>
       </ScheduleDate>
-      {el.item.map((el2, idx2) => (
-        <ScheduleOne color={el2.type} key={idx2}>
-          <Span>{el2.title}</Span>
-        </ScheduleOne>
-      ))}
+      {el.item.map((el2, idx2) => {
+        return idx2 < 3 ? (
+            <ScheduleOne
+              key={idx2}
+              color={el2.type}
+              onClick={toggleModal}>
+              <Span>{el2.title}</Span>
+            </ScheduleOne>
+          ) : null;
+      })}
+      {el.item.length > 3 && <ScheduleMore><Span>more...</Span></ScheduleMore>}
     </ScheduleBox>
   ));
 
@@ -102,6 +133,9 @@ const Schedule = () => {
           <BsChevronRight />
         </div>
       </ScheduleDiv>
+      <Modal show={modalOpen}>
+        <FundingDetail onClick={toggleModal}/>
+      </Modal>
     </>
   );
 };
@@ -160,7 +194,7 @@ const TabItem = styled.div<{ active: boolean }>`
 
   div {
     text-align: center;
-    transition: color .5s, border .5s;
+    transition: color .3s, border .3s;
     border-bottom: solid 2px;
     border-color: rgba(0, 0, 0, 0);
     ${(props: any) => {
@@ -180,7 +214,7 @@ const TabItem = styled.div<{ active: boolean }>`
 
   span {
     //text-transform: uppercase;
-    transition: color .5s;
+    transition: color .3s;
     ${(props: any) => {
       if (props.active) {
         return css`
@@ -201,7 +235,7 @@ const ScheduleDate = styled.div`
 
 const ScheduleBox = styled.div`
   width: 150px;
-  height: 125px;
+  height: 150px;
   background-color: ${(props) => props.theme.colors.theme3};
   margin: 0 5px;
   padding: 5px 10px 10px 10px;
@@ -218,7 +252,7 @@ const ScheduleOne = styled.div<{ color: string }>`
       background: ${color};
     `;
   }}
-  transition: box-shadow .5s;
+  transition: box-shadow .3s;
   
   &:hover {
     box-shadow: ${(props) => props.theme.colors.theme5} 4px 4px 6px;
@@ -227,6 +261,22 @@ const ScheduleOne = styled.div<{ color: string }>`
   span {
     font-size: ${(props) => props.theme.fonts.size.xs}px;
     color: ${(props) => props.theme.colors.font};
+  }
+`;
+
+const ScheduleMore = styled.div`
+  text-align: center;
+  margin: 6px 0;
+  padding: 2px 8px;
+  border-radius: 3px;
+
+  span {
+    font-size: ${(props) => props.theme.fonts.size.xs}px;
+    color: ${(props) => props.theme.colors.font};
+  }
+
+  span:hover {
+    color: ${(props) => props.theme.colors.main3};
   }
 `;
 

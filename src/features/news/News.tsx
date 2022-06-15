@@ -54,7 +54,15 @@ const NewsWapper = styled.div`
   }
 `;
 
-const NewsMain = styled.div``;
+const NewsMain = styled.div`
+  .progress-wrapper {
+    div {
+      top: -57px;
+      right: 5%;
+    }
+  }
+`;
+
 const NewsBody = styled.div`
   display: flex;
   justify-content: center;

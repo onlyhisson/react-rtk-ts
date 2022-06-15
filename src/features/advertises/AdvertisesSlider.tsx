@@ -5,6 +5,7 @@ import { useAppSelector } from "hooks";
 import { IAdvertisement } from "./interfaces/advertisement.interface";
 import { selectAdvertises } from "./advertisesSlice";
 import { Span } from "styles/global-styeld";
+import ProgressBar from 'components/html-elements/ProgressBar';
 
 /* imoprt css */
 import "slick-carousel/slick/slick.css";
@@ -12,44 +13,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 type TAfterChange = (currentSlide: number) => void;
 type TBeforeChange = (currentSlide: number, nextSlide: number) => void;
-
-const ProgressWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  border-radius: 6px;
-  touch-action: none;
-  box-sizing: border-box;
-`;
-
-const ProgressRail = styled.div<{ width: number }>`
-  position: absolute;
-  right: 5%;
-  top: -57px;
-  width: ${(props) => props.width}%;
-  height: 4px;
-  background-color: ${(props) => props.theme.colors.main};
-  border-radius: 6px;
-`;
-const ProgressTrack = styled.div<{ position: number }>`
-  position: absolute;
-  right: 5%;
-  top: -57px;
-  width: ${(props) => props.position}%;
-  height: 4px;
-  background-color: #e9e9e9;
-  border-radius: 6px;
-  transition: width 0.5s;
-`;
-
-const SliderTrack = ({ position }: any) => {
-  const W_PERCENT = 20;
-  return (
-    <ProgressWrapper className="track-wrapper">
-      <ProgressRail width={W_PERCENT}></ProgressRail>
-      <ProgressTrack position={W_PERCENT * (1 - position)}></ProgressTrack>
-    </ProgressWrapper>
-  );
-};
 
 const AdvertisesSlider = () => {
   const advertises = useAppSelector(selectAdvertises);
@@ -100,7 +63,7 @@ const AdvertisesSlider = () => {
   return (
     <div className="SlickComponent">
       <StyledSlider {...settings}>{renderedAdvertises}</StyledSlider>
-      <SliderTrack position={position.slideIndex / position.total} />
+      <ProgressBar wPercent={20} position={position.slideIndex / position.total} />
     </div>
   );
 };

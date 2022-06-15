@@ -51,6 +51,7 @@ const colors = {
   main: "rgba(91, 37, 236, 1)",
   main2: "rgba(140, 102, 242, 1)",
   main3: "rgba(0, 204, 153, 1)",
+  main4: "rgba(225,166,89,0.8)",
   error: "rgba(239, 83, 83, 1)",
   error2: "rgba(239, 83, 83, 0.1)",
   font: "#e4e7eb;",

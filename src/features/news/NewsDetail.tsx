@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { BsXLg } from "react-icons/bs";
 import { Span } from "styles/global-styeld";
 import NewsComments from "./NewsComments";
+import { CloseBtn } from "components/html-elements/Button";
 
 const NewsDetail = ({ news, onClick }: any) => {
   return (
     <NewsWrapper>
       <div className="nd-img">
-        <div className="nd-close" onClick={onClick}>
-          <BsXLg/>
+        <div className="nd-close">
+          <CloseBtn onClick={onClick} />
         </div>
         <img
           src={news.img}
@@ -42,21 +42,6 @@ const NewsWrapper = styled.div`
     right: 7px;
     display: flex;
     justify-content: flex-end;
-    padding-bottom: 10px;
-
-    svg {
-      width: 25px;
-      height: 25px;
-      color:  ${(props) => props.theme.colors.grey1};
-    }
-
-    span {
-      font-size: ${(props) => props.theme.fonts.size.xlg}px;
-    }
-
-    svg:hover {
-      color: white;
-    }
   }
 
   .nd-img {

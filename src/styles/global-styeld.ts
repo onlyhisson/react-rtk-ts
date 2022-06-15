@@ -21,7 +21,6 @@ export const Container = styled.div`
   padding: 0;
 `;
 
-
 export const Span = styled.span`
   font-family: "Pretendard";
   text-align: center;
