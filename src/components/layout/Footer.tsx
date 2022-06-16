@@ -1,10 +1,16 @@
 import styled from "styled-components";
-import { Span } from "styles/global-styeld";
+import { Span, ColDiv } from "styles/global-styeld";
 import routes from "routes";
 
 export const Footer = () => {
   return (
     <FooterWrapper>
+      <div className="footer-top">
+        <img
+          src={`${process.env.PUBLIC_URL}/assets/img/logo/logo_wh.png`}
+          alt="logo"
+        />
+      </div>
       <div className="footer-body">
         <div className="footer-col">
           <a href={routes.home}>
@@ -60,13 +66,16 @@ export const Footer = () => {
 
 const FooterWrapper = styled.footer`
   position: relative;
-  width: 100%;
-  height: 300px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
   background-color: ${(props) => props.theme.colors.theme6};
-  font-size: ${(props) => props.theme.fonts.size.lg}px;
+  font-size: ${(props) => props.theme.fonts.size.sm}px;
+  padding: 35px 20px;
+
+  div {
+    max-width: 1300px;
+  }
 
   span {
     color: ${(props) => props.theme.colors.font};
@@ -77,13 +86,28 @@ const FooterWrapper = styled.footer`
     text-decoration: none;
   }
 
+  .footer-top {
+    width: 100%;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: solid 1px ${(props) => props.theme.colors.theme3};
+    img {
+      width: 90px;
+    }
+  }
+
   .footer-body {
-    max-width: 1200px;
-    padding: 0 80px;
+    padding-top: 15px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+
+    span {
+      color: ${(props) => props.theme.colors.grey1};
+    }
   }
 
   .footer-col {

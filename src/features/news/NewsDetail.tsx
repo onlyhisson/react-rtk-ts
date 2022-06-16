@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Span } from "styles/global-styeld";
 import NewsComments from "./NewsComments";
-import { CloseBtn } from "components/html-elements/Button";
+import { CloseBtn } from "components/html-elements/Buttons";
 
 const NewsDetail = ({ news, onClick }: any) => {
   return (

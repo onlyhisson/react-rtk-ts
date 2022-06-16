@@ -11,8 +11,8 @@ const CloseDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  width: 29px;
+  height: 29px;
   border-radius: 15px;
   background-color: ${(props) => props.theme.colors.bk};
 

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled, { css, keyframes } from "styled-components";
 import { MdPlayArrow } from "react-icons/md";
-import { FaFacebookSquare, FaTwitter, FaLink, FaRegStar } from "react-icons/fa";
-import { CloseBtn } from "components/html-elements/Button";
+import { FaFacebookSquare, FaTwitter, FaLink } from "react-icons/fa";
+import { AiFillStar } from "react-icons/ai";
+import { CloseBtn } from "components/html-elements/Buttons";
 import { Span } from "styles/global-styeld";
 import ProgressBar from "components/html-elements/ProgressBar";
 
@@ -42,20 +43,45 @@ const FundingDetail = ({ onClick }:any ) => {
                     <Span>{TAGS.join("  |  ")}</Span>
                 </div>
                 <div className="prod-do-funding">
+                  <div className="f-cur-info">
+                    <div>
+                      <Span className="f-val">$250</Span>
+                      <Span className="unit-type">USD</Span>
+                    </div>
+                    <div>
+                      <Span className="f-val">100</Span>
+                      <Span className="unit-type">Bakers</Span>
+                    </div>
+                  </div>
+
                   <div className="prod-progress-bar">
                     <ProgressBar wPercent={100} position={0.5} />
                   </div>
-                  <div className="social-funding">
-                      <div className="like-it">
-                          <FaRegStar />   
-                      </div>
-                      <div className="social-group">
-                          <FaFacebookSquare />
-                          <FaTwitter />
-                          <FaLink />
-                      </div>
+
+                  <div className="f-cur-info">
+                    <div>
+                      <Span className="f-val">50%</Span>
+                      <Span className="unit-type">of $500 Goal</Span>
+                    </div>
+                    <div>
+                      <Span className="f-val">2</Span>
+                      <Span className="unit-type">days left</Span>
+                    </div>
                   </div>
-                  <div className="do-funding"><Span>펀딩하기</Span></div>
+
+                  <div className="like-funding">
+                    <div className="like-it">
+                      <AiFillStar />   
+                    </div>
+                    <div className="do-funding"><Span>펀딩하기</Span></div>
+                  </div>
+                  <div className="social-funding">
+                    <div className="social-group">
+                      <FaFacebookSquare />
+                      <FaTwitter />
+                      <FaLink />
+                    </div>
+                  </div>
                 </div>
             </div>
         </FundTop>
@@ -94,6 +120,12 @@ const FundingDetail = ({ onClick }:any ) => {
         </FundMain>
     </>
 }
+
+const Spin = keyframes`
+  100% { 
+    transform: rotate(360deg); 
+  }
+`;
 
 const ThumbNailItems = styled.img<{ active: boolean}>`
     width: 100px;
@@ -259,14 +291,69 @@ const FundTop = styled.div<{ fHeight: number, cHeight: number, img: string }>`
 
   .prod-do-funding {
     position: absolute;
-    top: 68%;
+    top: 47%;
     right: 5%;
   }
 
+  .f-cur-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+
+    .f-val {
+      color: ${(props) => props.theme.colors.font};
+      font-size: ${(props) => props.theme.fonts.size.xs}px;
+      font-weight: ${(props) => props.theme.fonts.weight.bold};
+    }
+
+    .unit-type {
+      margin-left: 5px;
+    }
+
+    span {
+      color: ${(props) => props.theme.colors.font};
+      font-size: ${(props) => props.theme.fonts.size.xs}px;
+    }
+  }
+  
+  .like-funding {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+  }
+
+  .like-it {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: inherit;
+    margin-right: 1px;
+    background-color: white;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: ${(props) => props.theme.colors.grey1};
+      margin: 0px;
+    }
+  }
+
+  .like-it:hover {
+    svg {
+      animation: ${Spin} 1000ms infinite linear;
+      color: ${(props) => props.theme.colors.main4};
+    }
+  }
+
   .do-funding {
-    text-align: center;
-    width: 100px;
-    padding: 8px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 145px;
+    height: inherit;
     background-color: white;
     transition: background-color .3s;
     span {
@@ -283,13 +370,13 @@ const FundTop = styled.div<{ fHeight: number, cHeight: number, img: string }>`
 
   .social-funding {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    padding: 10px 0px;
+    padding: 10px 5px;
 
     svg {
-        width: 20px;
-        height: 20px;
+        width: 15px;
+        height: 15px;
         color: white;
     }   
     
@@ -297,42 +384,21 @@ const FundTop = styled.div<{ fHeight: number, cHeight: number, img: string }>`
         color: ${(props) => props.theme.colors.main2};
     }
 
-    .like-it {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 20px;
-        height: 20px;
-        margin-right: 15px;
-        border-radius: 10px;
-        border: solid 1px;
-        border-color: ${(props) => props.theme.colors.font};
-
-        svg {
-            margin: 0px;
-        }
-
-        svg:hover {
-            color: white;
-        }
-    }
-
-    .like-it:hover {
-        background-color: ${(props) => props.theme.colors.main4};
-    }
-
     .social-group {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-        svg {
-            margin-left: 10px;
-        }
+      svg {
+          margin-left: 10px;
+      }
     }
-
   }
   
+  .prod-progress-bar {
+    padding: 10px auto;
+  }
+
   .prod-progress-bar .progress-wrapper {
     div {
       top: -10px;
