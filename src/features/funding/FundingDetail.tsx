@@ -291,8 +291,10 @@ const FundTop = styled.div<{ fHeight: number, cHeight: number, img: string }>`
 
   .prod-do-funding {
     position: absolute;
-    top: 47%;
-    right: 5%;
+    top: 42%;
+    right: 2%;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.2);
   }
 
   .f-cur-info {
