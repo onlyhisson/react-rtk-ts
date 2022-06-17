@@ -257,7 +257,7 @@ const FundTop = styled.div<{ fHeight: number, cHeight: number, img: string }>`
 
   .fw-content-group .type {
     position: absolute;
-    top: 63%;
+    top: 57%;
     left: 5%;
     font-size: ${(props) => props.theme.fonts.size.sm}px;
     border: solid 1px;
@@ -272,7 +272,7 @@ const FundTop = styled.div<{ fHeight: number, cHeight: number, img: string }>`
 
   .fw-content-group .title {
     position: absolute;
-    top: 73%;
+    top: 71%;
     left: 5%;
     font-size: ${(props) => props.theme.fonts.size.h3}px;
   }

@@ -194,7 +194,7 @@ const NewsItem = styled.div<{ active: boolean }>`
   margin-bottom: 20px;
   background-color: ${(props) => props.theme.colors.theme9};
   box-shadow: ${(props) => props.theme.colors.bk} 2px 5px 3px;
-  transition: box-shadow 300ms ease-in-out, transform 300ms ease-in-out;
+  transition: box-shadow 300ms ease-in-out;
 
   &:hover { 
     box-shadow: ${(props) => props.theme.colors.bk} 0px 0px 10px 3px;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Container } from "styles/global-styeld";
 import AdvertisesSlider from "features/advertises/AdvertisesSlider";
-import Schedule from "./Schedule";
+import Schedule from "features/funding/Schedule";
 import NewsList from "./NewsList";
 
 export const News = () => {
@@ -38,7 +38,6 @@ const NewsWapper = styled.div`
   .news-b-lb {
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-right: 14px;
   }
 
   .news-b-rt {
@@ -73,7 +72,7 @@ const NewsBody = styled.div`
 `;
 const NewsBodyLeft = styled.div`
   max-width: 900px;
-  padding-right: 20px;
+  padding-right: 30px;
 `;
 const NewsBodyRight = styled.div`
   min-width: 350px;

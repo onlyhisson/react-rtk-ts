@@ -3,11 +3,11 @@ import styled, { keyframes, css } from 'styled-components';
 
 const Modal = (props: any) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
-  const { show } = props;
+  const { show, maxWidth } = props;
 
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
-    <ModalWrapper className={'modal'} active={show}>
+    <ModalWrapper className={'modal'} active={show} maxWidth={maxWidth}>
       {show ? (
         <section>
           <main>{props.children}</main>
@@ -38,7 +38,7 @@ const ModalBgSlow = keyframes`
   }
 `
 
-const ModalWrapper = styled.div<{ active: boolean}>`
+const ModalWrapper = styled.div<{ active: boolean, maxWidth: number}>`
   display: none;
   position: fixed;
   top: 0;
@@ -67,7 +67,7 @@ const ModalWrapper = styled.div<{ active: boolean}>`
   section {
     width: 90%;
     min-width: 450px;
-    max-width: 900px;
+    max-width: ${props => props.maxWidth ? props.maxWidth : 900}px;
     margin: 0 auto;
     border-radius: 3px;
     background-color: ${props => props.theme.colors.theme5};
